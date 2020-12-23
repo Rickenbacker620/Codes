@@ -1,0 +1,6 @@
+*.exe
+*.lst
+*.map
+*.obj
+*.crf
+.vscode
