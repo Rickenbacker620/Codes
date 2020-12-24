@@ -5,6 +5,6 @@ module num_top(clk,in_num,out_led,arrange);
     output [7:0] out_led;
     output [7:0] arrange;
     clock_div ucd(clk, sclk);
-    ctc uc(sclk,count);
+    counter uc(sclk,count);
     num un(count, in_num, out_led, arrange);
 endmodule
