@@ -8,9 +8,9 @@ module convert(adc,bcd);
     always
     begin
      t1=adc/128;
-     t2<=t/10;
+     t2<=t1/10;
      t3[15:12]=t2[3:0];
-     t2=t%10;
+     t2=t1%10;
      t3[11:8]=t2[3:0];
 
      t4[7:0]<=adc[7:0]/10;
