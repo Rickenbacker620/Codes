@@ -1,7 +1,7 @@
 #ifndef MODEL_H_INCLUDED
 #define MODEL_H_INCLUDED
 
-#include <GLAD/glad.h>
+#include <glad/glad.h>
 #include <vector>
 
 #include "Util/NonCopyable.h"

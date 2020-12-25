@@ -1,18 +1,37 @@
-CMAKE_MINIMUM_REQUIRED( VERSION 2.8 ) #设定版本
-PROJECT(MC) #设定工程名
-SET(CMAKE_CXX_COMPILER "g++") #设定编译器
+cmake_minimum_required(VERSION 2.8)
 
-#设定可执行二进制文件的目录
-SET( EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+project(mc)
 
-#并且把该目录设为连接目录
-LINK_DIRECTORIES( ${PROJECT_SOURCE_DIR}/lib)
+file(GLOB_RECURSE SOURCE "Source/*.cpp")
 
-#设定头文件目录
-INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/include)
+add_executable(mc
+    ${SOURCE}
+)
 
-#增加子文件夹，也就是进入源代码文件夹继续构建
-ADD_SUBDIRECTORY( ${PROJECT_SOURCE_DIR}/src)
+target_link_directories(mc
+    PUBLIC
+        "D:/Devs/OpenGL(MinGW)/GLFWlib"
+    PUBLIC
+        "D:/Devs/OpenGL(MinGW)/SFMLlib"
+)
 
-#生成应用程序 ,如:hello (在windows下会自动生成hello.exe)
-ADD_EXECUTABLE(hello cpp文件)
+target_link_libraries(mc
+    sfml-window-s
+    sfml-system-s
+    sfml-graphics-s
+    opengl32
+    glfw3
+    glad
+    gdi32
+    winmm
+)
+
+target_include_directories(mc
+    PUBLIC
+        "D:/Devs/OpenGL(MinGW)/include"
+)
+
+target_compile_definitions(mc
+    PUBLIC
+    SFML_STATIC
+)

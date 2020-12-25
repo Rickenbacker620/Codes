@@ -1,6 +1,6 @@
 #include "Context.h"
 
-#include <GLAD/glad.h>
+#include <glad/glad.h>
 
 Context::Context()
 {

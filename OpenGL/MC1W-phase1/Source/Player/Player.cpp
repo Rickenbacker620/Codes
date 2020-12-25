@@ -1,6 +1,7 @@
 #include "Player.h"
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 Player::Player()
 {
@@ -43,6 +44,7 @@ void Player::keyboardInput()
     {
         change.x = -glm::cos(glm::radians(rotation.y)) * speed;
         change.z = -glm::sin(glm::radians(rotation.y)) * speed;
+        std::cout << "hello" << std::endl;
     }
 
     m_velocity += change;

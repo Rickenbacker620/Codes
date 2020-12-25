@@ -1,13 +1,12 @@
 {
 	"folders": [
 		{
-			"name": "OpenGL(MinGW)",
-			"path": "D:\\Devs\\OpenGL(MinGW)"
-		},
-		{
-			"name": "OpenGL",
-			"path": "."
+			"path": "GLfrom0"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"*.h": "cpp"
+		}
+	}
 }
