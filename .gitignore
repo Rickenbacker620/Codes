@@ -5,3 +5,4 @@
 *.crf
 .vscode
 CMakebuild/
+*.code-workspace
