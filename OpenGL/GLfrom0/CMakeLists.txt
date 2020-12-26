@@ -4,7 +4,7 @@ project(learnGL)
 
 
 add_executable(learnGL
-    src/case2.cpp
+    src/debugtest.cpp
     "D:/Devs/modernGL/src/glUtils.cpp"
     "D:/Devs/modernGL/src/shader.cpp"
     "D:/Devs/modernGL/src/vao.cpp"

@@ -7,6 +7,22 @@
 #include <cmath>
 #include <iostream>
 
+void GLAPIENTRY
+MessageCallback(GLenum source,
+                GLenum type,
+                GLuint id,
+                GLenum severity,
+                GLsizei length,
+                const GLchar *message,
+                const void *userParam)
+{
+    // fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
+    //         (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
+    //         type, severity, message);
+    std::cout << "hello";
+}
+
+// During init, enable debug output
 //test texture (using std_image header only lib)
 
 float vertices[] = {
@@ -20,6 +36,7 @@ unsigned int indices[] = {
 
 int main()
 {
+    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
     auto window = CreateApp("hello", 800, 600);
 
     Shader program("../resources/shaders/textureshader.glsl");
@@ -31,6 +48,7 @@ int main()
     layout.Pushfloat(2);
     VAO.AddBuffer(VBO, layout);
     ElementBuffer EBO(indices, 6);
+    std::cout << glGetError() << std::endl;
 
     unsigned int texture;
     glGenTextures(1, &texture);
@@ -43,7 +61,8 @@ int main()
     unsigned char *data = stbi_load("../resources/textures/container.jpg", &width, &height, &nrChannels, 0);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
-    LOG(width);
+    // glEnable(GL_DEBUG_OUTPUT);
+    // glDebugMessageCallback(MessageCallback, 0);
 
     while (!glfwWindowShouldClose(window))
     {
