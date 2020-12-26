@@ -36,7 +36,6 @@ int main()
     stbi_set_flip_vertically_on_load(true);
     Texture tx2("../resources/textures/awesomeface.png", GL_RGBA);
     Texture::Config();
-    program.Bind();
 
     while (!glfwWindowShouldClose(window))
     {
