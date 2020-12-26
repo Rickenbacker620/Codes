@@ -2,34 +2,18 @@
 #include <stb_image.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <glUtils.h>
+#include <glutils.h>
 #include <gldebug.h>
 #include <cmath>
 #include <iostream>
 
-void GLAPIENTRY
-MessageCallback(GLenum source,
-                GLenum type,
-                GLuint id,
-                GLenum severity,
-                GLsizei length,
-                const GLchar *message,
-                const void *userParam)
-{
-    // fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
-    //         (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
-    //         type, severity, message);
-    std::cout << "hello";
-}
-
-// During init, enable debug output
 //test texture (using std_image header only lib)
 
 float vertices[] = {
-    0.5f, 0.5f, 0.0f, 0.5f, 0.1f, 0.7f, 1.0f, 1.0f,
-    0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.4f, 1.0f, 0.0f,
-    -0.5f, -0.5f, 0.0f, 0.3f, 0.9f, 0.7f, 0.0f, 0.0f,
-    -0.5f, 0.5f, 0.0f, 0.6f, 0.1f, 0.2f, 0.0f, 1.0f};
+    0.5, 0.5, 0.0, 0.5, 0.1, 0.7, 1.0, 1.0,
+    0.5, -0.5, 0.0, 0.2, 0.3, 0.4, 1.0, 0.0,
+    -0.5, -0.5, 0.0, 0.3, 0.9, 0.7, 0.0, 0.0,
+    -0.5, 0.5, 0.0, 0.6, 0.1, 0.2, 0.0, 1.0};
 unsigned int indices[] = {
     0, 1, 3,
     1, 2, 3};
@@ -48,38 +32,32 @@ int main()
     layout.Pushfloat(2);
     VAO.AddBuffer(VBO, layout);
     ElementBuffer EBO(indices, 6);
-    std::cout << glGetError() << std::endl;
-
-    unsigned int texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    int width, height, nrChannels;
-    unsigned char *data = stbi_load("../resources/textures/container.jpg", &width, &height, &nrChannels, 0);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    // glEnable(GL_DEBUG_OUTPUT);
-    // glDebugMessageCallback(MessageCallback, 0);
+    Texture tx1("../resources/textures/container.jpg", GL_RGB);
+    stbi_set_flip_vertically_on_load(true);
+    Texture tx2("../resources/textures/awesomeface.png", GL_RGBA);
+    Texture::Config();
+    program.Bind();
 
     while (!glfwWindowShouldClose(window))
     {
         processInput(window);
+        //////////////////////////////////////
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.2, 0.3, 0.3, 1.0);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        float base = (sin(glfwGetTime() * 2.0f)) + 2.6f;
-        glUniform1f(program.GetUniformLocation("baase"), base);
-        program.Bind();
+        float shift = (sin(glfwGetTime() * 2.0)) + 2.6;
+        glUniform1f(program.GetUniformLocation("shift"), shift);
+
+        glUniform1i(program.GetUniformLocation("box"), 0);
+        glUniform1i(program.GetUniformLocation("happy"), 1);
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        //////////////////////////////////////
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-
     glfwTerminate();
     return 0;
 }

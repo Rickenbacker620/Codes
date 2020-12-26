@@ -4,13 +4,14 @@ project(learnGL)
 
 
 add_executable(learnGL
-    src/debugtest.cpp
+    src/case2.cpp
     "D:/Devs/modernGL/src/glUtils.cpp"
     "D:/Devs/modernGL/src/shader.cpp"
     "D:/Devs/modernGL/src/vao.cpp"
     "D:/Devs/modernGL/src/vbo.cpp"
     "D:/Devs/modernGL/src/ebo.cpp"
     "D:/Devs/modernGL/src/gldebug.cpp"
+    "D:/Devs/modernGL/src/texture.cpp"
 )
 
 target_link_directories(learnGL

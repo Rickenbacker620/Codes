@@ -6,49 +6,24 @@ layout (location = 2) in vec2 aTexCoord;
 
 out vec3 ourColor;
 out vec2 TexCoord;
+uniform float shift;
 
 void main()
 {
     gl_Position = vec4(aPos, 1.0);
-    ourColor = aColor;
+    ourColor = aColor*shift;
     TexCoord = aTexCoord;
 }
 
 #shader fragment
 #version 330 core
-in vec3 aColl;
+
 out vec4 FragColor;
+in vec2 TexCoord;
+in vec3 ourColor;
+uniform sampler2D box;
+uniform sampler2D happy;
 void main()
 {
-   FragColor = vec4(aColl, 1.0f);
+   FragColor = mix(texture(box, TexCoord) ,texture(happy, TexCoord), 0.2) * vec4(ourColor,1.0);
 }
-
-// #shader vertex
-// #version 330 core
-// layout (location = 0) in vec3 aPos;
-// layout (location = 1) in vec3 aColor;
-// layout (location = 2) in vec2 aTexCoord;
-
-// out vec3 ourColor;
-// out vec2 TexCoord;
-
-// void main()
-// {
-//     gl_Position = vec4(aPos, 1.0);
-//     ourColor = aColor;
-//     TexCoord = aTexCoord;
-// }
-
-// #shader fragment
-// #version 330 core
-// out vec4 FragColor;
-
-// in vec3 ourColor;
-// in vec2 TexCoord;
-
-// uniform sampler2D ourTexture;
-
-// void main()
-// {
-//     FragColor = texture(ourTexture, TexCoord);
-// }

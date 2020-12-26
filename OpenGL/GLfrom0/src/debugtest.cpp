@@ -36,7 +36,6 @@ int main()
         float base = 1.2;
         program.Bind();
         int i = program.GetUniformLocation("baase");
-        // GLCall(glUniform1f(i, base));
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glClearError();
         glUniform1f(0, 1.2);
