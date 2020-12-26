@@ -2,14 +2,19 @@ cmake_minimum_required(VERSION 2.8)
 
 project(learnGL)
 
-file(GLOB_RECURSE SOURCE "src/*.cpp")
 
 add_executable(learnGL
-    ${SOURCE}
+    src/case2.cpp
+    "D:/Devs/modernGL/src/glUtils.cpp"
+    "D:/Devs/modernGL/src/shader.cpp"
+    "D:/Devs/modernGL/src/vao.cpp"
+    "D:/Devs/modernGL/src/vbo.cpp"
+    "D:/Devs/modernGL/src/ebo.cpp"
+    "D:/Devs/modernGL/src/gldebug.cpp"
 )
 
 target_link_directories(learnGL
-    PUBLIC
+    PRIVATE
         "D:/Devs/OpenGL(MinGW)/GLFWlib"
 )
 
@@ -21,6 +26,8 @@ target_link_libraries(learnGL
 )
 
 target_include_directories(learnGL
-    PUBLIC
+    PRIVATE
         "D:/Devs/OpenGL(MinGW)/include"
+    PUBLIC
+        "D:/Devs/modernGL/include"
 )
