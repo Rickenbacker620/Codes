@@ -25,5 +25,5 @@ uniform sampler2D box;
 uniform sampler2D happy;
 void main()
 {
-   FragColor = mix(texture(box, TexCoord) ,texture(happy, TexCoord), 0.2) * vec4(ourColor,1.0);
+   gl_FragColor = mix(texture(box, TexCoord) ,texture(happy, TexCoord), 0.2) * vec4(ourColor,1.0);
 }

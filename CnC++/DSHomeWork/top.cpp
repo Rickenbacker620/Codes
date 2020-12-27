@@ -1,76 +1,67 @@
+#include <cstring>
 #include <iostream>
 #include <algorithm>
-#include <cstring>
+#include <fstream>
 #include <queue>
+
 using namespace std;
-const int N = 1e5 + 10;
-int d[N],n,m,top[N],cnt = 1;
+const int N = 100010;
 
-struct node
-{
-    int vertex;
-    node* nextarc = nullptr;
-};
-
-node g[N];
-
-// struct hnode
-// {
-//     int vertex;
-//     node* firstarc = nullptr;
-// };
-
+int n, m;
+int h[N], e[N], ne[N], idx;
+int d[N];
+int ans[N];
+queue<int> q;
+int counter = 0;
 
 void add(int a, int b)
 {
-    node* tmp = new node();
-    tmp->nextarc = g[a].nextarc;
-    g[a].nextarc = tmp;
+    e[idx] = b, ne[idx] = h[a], h[a] = idx++;
 }
 
-
-// void add(int a,int b)
-// {
-//     e[idx] = b;
-//     ne[idx] = h[a];
-//     h[a] = idx ++;
-// }
-bool topsort(){
-    queue<int> q;
-    int t;
-    for(int i = 1;i <= n; ++i)// 将所有入度为0的点加入队列
-        if(d[i] == 0) q.push(i);
-    while(q.size()){
-        t = q.front();//每次取出队列的首部
-        top[cnt] = t;//加入到 拓扑序列中
-        cnt ++; // 序列中的元素 ++
-        q.pop();
-        for(int i = h[t];i != -1; i = ne[i]){
-            // 遍历 t 点的出边
-            int j = e[i];
-            d[j] --;// j 的入度 --
-            if(d[j] == 0) q.push(j); //如果 j 入度为0，加入队列当中
-        }
-    }
-    if(cnt < n) return 0;
-    else return 1;
-
-}
-int main(){
-    int a,b;
-    cin >> n >> m;
+bool topsort()
+{
     for (int i = 1; i <= n; i++)
-        g[i].vertex = i;
-    while(m--){
-        cin >> a >> b;
-        add(a,b);
-        d[b] ++;
-    }
-    if(topsort() == 0) cout << "-1";
-    else {
-        for(int i = 1;i <= n; ++i){
-            cout << top[i] <<" ";
+        if (!d[i])
+        {
+            q.push(i);
+            ans[counter++] = i;
+        }
+    while (q.size())
+    {
+        int t = q.front();
+        q.pop();
+        for (int i = h[t]; i != -1; i = ne[i])
+        {
+            int j = e[i];
+            if (--d[j] == 0)
+            {
+                q.push(j);
+                ans[counter++] = j;
+            }
         }
     }
+    return counter == n;
+}
+
+int main()
+{
+    cin >> n >> m;
+    memset(h, -1, sizeof h);
+    for (int i = 0; i < m; i++)
+    {
+        int a, b;
+        cin >> a >> b;
+        add(a, b);
+        d[b]++;
+    }
+    if (!topsort())
+        puts("-1");
+    else
+    {
+        for (int i = 0; i < n; i++)
+            cout << ans[i] << ' ';
+    }
+    system("pause");
     return 0;
 }

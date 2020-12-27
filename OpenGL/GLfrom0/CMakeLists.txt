@@ -4,6 +4,7 @@ project(learnGL)
 
 
 add_executable(learnGL
+    # src/rainbow.cpp
     src/case3.cpp
     "D:/Devs/modernGL/src/glUtils.cpp"
     "D:/Devs/modernGL/src/shader.cpp"
