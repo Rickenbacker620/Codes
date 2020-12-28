@@ -82,6 +82,33 @@ void insertion(vector<Unit> &nums)
 
 ///////////////////////////////////////////////////////////////////////////////////
 
+void binary_ins(vector<Unit> &nums)
+{
+    cout << "binary insertion sort:" << endl;
+    int len = nums.size();
+    for (int i = 0; i < len; i++)
+    {
+        int l = 0, r = i - 1;
+        Unit t = nums[i];
+        while (l <= r)
+        {
+            int mid = (l + r) / 2;
+            if (nums[mid].data < t.data)
+                l = mid + 1;
+            else
+                r = mid - 1;
+        }
+        for (int j = i - 1; j >= l; j--)
+        {
+            nums[j + 1] = nums[j];
+        }
+        if (i != l)
+            nums[l] = t;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
 void shell(vector<Unit> &nums)
 {
     cout << "shell sort:" << endl;
@@ -172,13 +199,44 @@ void quicksort(vector<Unit> &nums)
 
 ///////////////////////////////////////////////////////////////////////////////////
 
+void build_heap(vector<Unit> &nums, int root, int size)
+{
+    int l = 2 * root + 1;
+    int r = 2 * root + 2;
+    int max = root;
+    if (l < size && nums[l].data > nums[max].data)
+        max = l;
+    if (r < size && nums[r].data > nums[max].data)
+        max = r;
+    if (max != root)
+    {
+        swap(nums[max], nums[root]);
+        build_heap(nums, max, size);
+    }
+}
+
+void heapsort(vector<Unit> &nums)
+{
+    int len = nums.size();
+    for (int i = len / 2 - 1; i >= 0; i--)
+        build_heap(nums, i, len);
+
+    for (int i = len - 1; i >= 0; i--)
+    {
+        swap(nums[0], nums[i]);
+        build_heap(nums, 0, i);
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
 vector<Unit> a(100);
 
 int main()
 {
     srand(1);
-    runsort(a, selection);
-    srand(2);
-    runsort(a, quicksort);
+    runsort(a, heapsort);
+    // srand(2);
+    // runsort(a, quicksort);
     return 0;
 }
