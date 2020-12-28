@@ -6,7 +6,14 @@
 
 using namespace std;
 
-void shuffle(vector<int> &a);
-void swap(int &a, int &b);
-bool check(vector<int> &nums);
-void show(vector<int> &nums);
+struct Unit
+{
+    int data;
+    int mark;
+};
+
+void shuffle(vector<Unit> &a);
+void swap(Unit &a, Unit &b);
+bool check_sort(vector<Unit> &nums);
+bool check_stable(vector<Unit> &nums);
+void show(vector<Unit> &nums);
