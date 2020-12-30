@@ -1,8 +1,8 @@
 #include "Application.h"
 #include "States/PlayingState.h"
+#include <iostream>
 
-
-Application::Application(std::string&& name)
+Application::Application(std::string &&name)
 {
     pushState<StatePlaying>(*this);
 }
@@ -14,7 +14,7 @@ void Application::runLoop()
     while (m_context.window.isOpen() && !m_states.empty())
     {
         auto deltaTime = dtTimer.restart();
-        auto& state = *m_states.back();
+        auto &state = *m_states.back();
 
         state.handleInput();
         state.update(deltaTime.asSeconds());
@@ -37,30 +37,29 @@ void Application::handleEvents()
     sf::Event e;
     while (m_context.window.pollEvent(e))
     {
-        switch(e.type)
+        switch (e.type)
         {
-            case sf::Event::Closed:
+        case sf::Event::Closed:
+            m_context.window.close();
+            break;
+
+        case sf::Event::KeyPressed:
+            switch (e.key.code)
+            {
+            case sf::Keyboard::Escape:
                 m_context.window.close();
-                break;
-
-            case sf::Event::KeyPressed:
-                switch(e.key.code)
-                {
-                    case sf::Keyboard::Escape:
-                        m_context.window.close();
-                        break;
-
-                    default:
-                        break;
-                }
                 break;
 
             default:
                 break;
+            }
+            break;
+
+        default:
+            break;
         }
     }
 }
-
 
 void Application::popState()
 {

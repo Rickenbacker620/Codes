@@ -1,33 +1,11 @@
 #include <iostream>
 using namespace std;
 
-int g_constructCount = 0;
-int g_copyConstructCount = 0;
-int g_destructCount = 0;
-struct A
-{
-    A()
-    {
-        cout << "construct: " << ++g_constructCount << endl;
-    }
-
-    A(const A &a)
-    {
-        cout << "copy construct: " << ++g_copyConstructCount << endl;
-    }
-    ~A()
-    {
-        cout << "destruct: " << ++g_destructCount << endl;
-    }
-};
-
-A GetA()
-{
-    return A();
-}
-
 int main()
 {
-    A &&a = GetA();
+    int a[2][2] = {{1, 2}, {3, 4}};
+    auto p = &a;
+    for (int i = 0; i < 2; i++)
+        cout << **p++ << endl;
     return 0;
 }

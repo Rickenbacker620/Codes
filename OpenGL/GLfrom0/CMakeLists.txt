@@ -13,6 +13,7 @@ add_executable(learnGL
     "D:/Devs/modernGL/src/ebo.cpp"
     "D:/Devs/modernGL/src/gldebug.cpp"
     "D:/Devs/modernGL/src/texture.cpp"
+    "D:/Devs/modernGL/src/camera.cpp"
 )
 
 target_link_directories(learnGL

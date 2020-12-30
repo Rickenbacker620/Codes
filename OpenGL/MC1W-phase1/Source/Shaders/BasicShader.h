@@ -5,18 +5,18 @@
 
 class BasicShader : public Shader
 {
-    public:
-        BasicShader(const std::string& vertexFile   = "BasicVertex",
-                    const std::string& fragmentFile = "BasicFragment");
+public:
+    BasicShader(const std::string &vertexFile = "BasicVertex",
+                const std::string &fragmentFile = "BasicFragment");
 
-        void loadProjectionViewMatrix   (const glm::mat4& pvMatrix);
-        void loadModelMatrix            (const glm::mat4& matrix);
+    void loadProjectionViewMatrix(const glm::mat4 &pvMatrix);
+    void loadModelMatrix(const glm::mat4 &matrix);
 
-    private:
-        virtual void getUniforms() override;
+private:
+    virtual void getUniforms() override;
 
-        GLuint m_locationProjectionViewMatrix;
-        GLuint m_locationModelMatrix;
+    GLuint m_locationProjectionViewMatrix;
+    GLuint m_locationModelMatrix;
 };
 
 #endif // BASICSHADER_H_INCLUDED
