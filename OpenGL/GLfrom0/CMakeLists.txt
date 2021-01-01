@@ -5,7 +5,7 @@ project(learnGL)
 
 add_executable(learnGL
     # src/rainbow.cpp
-    src/case3.cpp
+    src/case4.cpp
     "D:/Devs/modernGL/src/glUtils.cpp"
     "D:/Devs/modernGL/src/shader.cpp"
     "D:/Devs/modernGL/src/vao.cpp"
@@ -14,6 +14,8 @@ add_executable(learnGL
     "D:/Devs/modernGL/src/gldebug.cpp"
     "D:/Devs/modernGL/src/texture.cpp"
     "D:/Devs/modernGL/src/camera.cpp"
+    "D:/Devs/modernGL/src/abstractmodel.cpp"
+    "D:/Devs/modernGL/src/cubemodel.cpp"
 )
 
 target_link_directories(learnGL
