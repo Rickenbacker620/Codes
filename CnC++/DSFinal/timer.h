@@ -9,7 +9,7 @@ using std::chrono::time_point;
 
 class Timer
 {
-public:
+  public:
     Timer()
     {
         start = steady_clock::now();
@@ -23,6 +23,6 @@ public:
         cout << endl;
     }
 
-private:
+  private:
     std::chrono::time_point<std::chrono::steady_clock> start;
 };

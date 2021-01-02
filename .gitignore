@@ -7,3 +7,5 @@
 CMakebuild/
 *.code-workspace
 .clang-format
+bin/
+obj/

@@ -3,7 +3,8 @@
 #include "timer.h"
 using namespace std;
 
-void runsort(vector<Unit> &nums, void (*mysort)(vector<Unit> &))
+void
+runsort(vector<Unit> &nums, void (*mysort)(vector<Unit> &))
 {
     cout << endl;
     if (nums.size() > 20)
@@ -30,7 +31,8 @@ void runsort(vector<Unit> &nums, void (*mysort)(vector<Unit> &))
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-void bubble(vector<Unit> &nums)
+void
+bubble(vector<Unit> &nums)
 {
     cout << "bubble:" << endl;
     int len = nums.size();
@@ -46,7 +48,8 @@ void bubble(vector<Unit> &nums)
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-void selection(vector<Unit> &nums)
+void
+selection(vector<Unit> &nums)
 {
     cout << "selection sort" << endl;
     int count = 0;
@@ -65,7 +68,8 @@ void selection(vector<Unit> &nums)
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-void insertion(vector<Unit> &nums)
+void
+insertion(vector<Unit> &nums)
 {
     cout << "insertion sort:" << endl;
     int len = nums.size();
@@ -82,7 +86,8 @@ void insertion(vector<Unit> &nums)
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-void binary_ins(vector<Unit> &nums)
+void
+binary_ins(vector<Unit> &nums)
 {
     cout << "binary insertion sort:" << endl;
     int len = nums.size();
@@ -109,7 +114,8 @@ void binary_ins(vector<Unit> &nums)
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-void shell(vector<Unit> &nums)
+void
+shell(vector<Unit> &nums)
 {
     cout << "shell sort:" << endl;
     int len = nums.size();
@@ -129,7 +135,8 @@ void shell(vector<Unit> &nums)
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-void merge(vector<Unit> &nums, vector<Unit> &temp, int lo, int mid, int hi)
+void
+merge(vector<Unit> &nums, vector<Unit> &temp, int lo, int mid, int hi)
 {
     if (temp[mid].data <= temp[mid + 1].data)
     {
@@ -149,7 +156,8 @@ void merge(vector<Unit> &nums, vector<Unit> &temp, int lo, int mid, int hi)
             nums[k] = temp[j++];
 }
 
-void msubsort(vector<Unit> &nums, vector<Unit> &temp, int lo, int hi)
+void
+msubsort(vector<Unit> &nums, vector<Unit> &temp, int lo, int hi)
 {
     if (lo >= hi)
         return;
@@ -159,7 +167,8 @@ void msubsort(vector<Unit> &nums, vector<Unit> &temp, int lo, int hi)
     merge(nums, temp, lo, mid, hi);
 }
 
-void mergesort(vector<Unit> &nums)
+void
+mergesort(vector<Unit> &nums)
 {
     cout << "merge sort:" << endl;
     vector<Unit> temp = nums;
@@ -168,7 +177,8 @@ void mergesort(vector<Unit> &nums)
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-void qsubsort(vector<Unit> &nums, int lo, int hi)
+void
+qsubsort(vector<Unit> &nums, int lo, int hi)
 {
     if (lo >= hi)
         return;
@@ -190,7 +200,8 @@ void qsubsort(vector<Unit> &nums, int lo, int hi)
     qsubsort(nums, j + 1, hi);
 }
 
-void quicksort(vector<Unit> &nums)
+void
+quicksort(vector<Unit> &nums)
 {
     cout << "quick sort:" << endl;
     int lo = 0, hi = nums.size() - 1;
@@ -199,7 +210,8 @@ void quicksort(vector<Unit> &nums)
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-void build_heap(vector<Unit> &nums, int root, int size)
+void
+build_heap(vector<Unit> &nums, int root, int size)
 {
     int l = 2 * root + 1;
     int r = 2 * root + 2;
@@ -215,7 +227,8 @@ void build_heap(vector<Unit> &nums, int root, int size)
     }
 }
 
-void heapsort(vector<Unit> &nums)
+void
+heapsort(vector<Unit> &nums)
 {
     int len = nums.size();
     for (int i = len / 2 - 1; i >= 0; i--)
@@ -232,7 +245,8 @@ void heapsort(vector<Unit> &nums)
 
 vector<Unit> a(100);
 
-int main()
+int
+main()
 {
     srand(1);
     runsort(a, heapsort);
