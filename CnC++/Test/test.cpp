@@ -1,11 +1,17 @@
 #include <iostream>
+#include <stdlib.h>
+
 using namespace std;
 
-int main()
-{
-    int a[2][2] = {{1, 2}, {3, 4}};
-    auto p = &a;
-    for (int i = 0; i < 2; i++)
-        cout << **p++ << endl;
-    return 0;
+struct CLS {
+  int m_i;
+  CLS(int i) : m_i(i) {}
+  CLS() { CLS(0); }
+};
+int main() {
+  CLS obj;
+  cout << obj.m_i << endl;
+
+  system("PAUSE");
+  return 0;
 }

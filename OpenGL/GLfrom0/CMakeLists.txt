@@ -14,7 +14,7 @@ add_executable(learnGL
     "D:/Devs/modernGL/src/gldebug.cpp"
     "D:/Devs/modernGL/src/texture.cpp"
     "D:/Devs/modernGL/src/camera.cpp"
-    "D:/Devs/modernGL/src/abstractmodel.cpp"
+    "D:/Devs/modernGL/src/model.cpp"
     "D:/Devs/modernGL/src/cubemodel.cpp"
 )
 

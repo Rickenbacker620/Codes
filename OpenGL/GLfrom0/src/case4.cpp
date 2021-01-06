@@ -111,15 +111,12 @@ main()
 
     Cube cube;
     cube.SetVertex(cubev, sizeof(cubev));
-    cube.SetLayout();
-    cube.SetLayout();
-    cube.ConfigVao();
+    cube.SetLayout({{3, "float"}, {3, "float"}});
     cube.SetShader("../resources/shaders/lightedobj.glsl");
 
     Cube light;
     light.SetVertex(lightv, sizeof(lightv));
-    light.SetLayout();
-    light.ConfigVao();
+    light.SetLayout({{3, "float"}});
     light.SetShader("../resources/shaders/light.glsl");
 
     while (!glfwWindowShouldClose(window))
@@ -137,12 +134,12 @@ main()
         cube.SetUniform3f("lightPos", lightPos);
         cube.SetUniform3f("viewPos", camera.GetPosition());
 
-        cube.SetModelMatrix(glm::mat4(1.0f));
-        cube.SetVPMatrix(camera);
+        cube.SetModel(glm::mat4(1.0f));
+        cube.HookCamera(camera);
         cube.DrawTriangle();
 
-        light.SetModelMatrix(glm::scale(glm::translate(glm::mat4(1.0f), lightPos), glm::vec3(0.2f)));
-        light.SetVPMatrix(camera);
+        light.SetModel(glm::scale(glm::translate(glm::mat4(1.0f), lightPos), glm::vec3(0.2f)));
+        light.HookCamera(camera);
         light.DrawTriangle();
 
         //////////////////////////////////////
