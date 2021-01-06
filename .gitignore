@@ -9,3 +9,6 @@ CMakebuild/
 .clang-format
 bin/
 obj/
+out/
+build/
+.vs/
