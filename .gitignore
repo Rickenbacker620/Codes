@@ -12,3 +12,4 @@ obj/
 out/
 build/
 .vs/
+CMakeSettings.json
