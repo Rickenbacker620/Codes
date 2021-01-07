@@ -49,13 +49,13 @@ processInput(GLFWwindow *window)
     deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        camera.ProcessKeyboardInput(FORWARD, deltaTime);
+        camera.ProcessKeyboardInput(CamDir::FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        camera.ProcessKeyboardInput(BACKWARD, deltaTime);
+        camera.ProcessKeyboardInput(CamDir::BACKWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        camera.ProcessKeyboardInput(LEFT, deltaTime);
+        camera.ProcessKeyboardInput(CamDir::LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        camera.ProcessKeyboardInput(RIGHT, deltaTime);
+        camera.ProcessKeyboardInput(CamDir::RIGHT, deltaTime);
 }
 
 float lightv[] = {
