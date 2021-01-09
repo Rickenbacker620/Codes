@@ -112,6 +112,7 @@ main()
     Cube cube;
     cube.SetVertex(cubev, sizeof(cubev));
     cube.SetLayout({{3, "float"}, {3, "float"}});
+
     cube.SetShader("../resources/shaders/lightedobj.glsl");
 
     Cube light;

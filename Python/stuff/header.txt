@@ -1,3 +1,0 @@
-zjh : username,
-mm : password,
-v_yzm : validcode

@@ -28,6 +28,7 @@ DeletePath(int x, int y)
     }
     graph[x][y] = INF;
     graph[y][x] = INF;
+    cout << "Deleted successfully!" << endl;
 }
 
 void
@@ -119,13 +120,14 @@ void
 ShowParkInfo()
 {
     for (int i = 1; i <= n; i++)
-        cout << i;
+        cout << "park " << i << endl;
     cout << endl;
 }
 
 int
 main()
 {
+    cout << "please input the graph: " << endl;
     cin >> n >> m;
     memset(graph, 0x3f, sizeof(graph));
     while (m--)
@@ -139,13 +141,17 @@ main()
     while (!exitFlag)
     {
         int x, y, op;
-        cout << "Choose operation: " << endl
-             << "1) Show parks information" << endl
-             << "2) Show paths information" << endl
-             << "3) Modify path" << endl
-             << "4) Search shortest path" << endl
-             << "5) Delete edge" << endl
-             << "6) exit" << endl;
+        cout << endl
+             << "+++==========================+++" << endl
+             << "||Choose operation:           ||" << endl
+             << "||1) Show parks information   ||" << endl
+             << "||2) Show paths information   ||" << endl
+             << "||3) Modify path              ||" << endl
+             << "||4) Search shortest path     ||" << endl
+             << "||5) Delete edge              ||" << endl
+             << "||6) exit                     ||" << endl
+             << "+++==========================+++" << endl
+             << endl;
         cin >> op;
         switch (op)
         {
