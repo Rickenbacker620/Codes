@@ -24,10 +24,15 @@ struct TNode
 class BiTree
 {
   public:
-    void CreateTree()
+    TNode *CreateTree(TNode *root)
     {
         char ch;
         cin >> ch;
+        if (ch == '#')
+            root == nullptr;
+        else
+            root = new TNode(ch, CreateTree(root->lchild), CreateTree(root->rchild));
+        return root;
     }
 
   private:
@@ -37,4 +42,6 @@ class BiTree
 int
 main()
 {
+    BiTree t;
+    t.CreateTree();
 }
