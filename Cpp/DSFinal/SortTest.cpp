@@ -9,8 +9,11 @@ runsort(vector<Unit> &nums, void (*mysort)(vector<Unit> &))
     cout << endl;
     if (nums.size() > 20)
         shuffle(nums);
-    cout << "initial order:" << endl;
-    show(nums);
+    if (nums.size() < 200)
+    {
+        cout << "initial order:" << endl;
+        show(nums);
+    }
     {
         Timer time;
         mysort(nums);
@@ -230,6 +233,7 @@ build_heap(vector<Unit> &nums, int root, int size)
 void
 heapsort(vector<Unit> &nums)
 {
+    cout << "heap sort" << endl;
     int len = nums.size();
     for (int i = len / 2 - 1; i >= 0; i--)
         build_heap(nums, i, len);
@@ -243,14 +247,19 @@ heapsort(vector<Unit> &nums)
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-vector<Unit> a(100);
+vector<Unit> a(20000);
 
 int
 main()
 {
     srand(1);
+    runsort(a, bubble);
+    runsort(a, selection);
+    runsort(a, insertion);
+    runsort(a, binary_ins);
+    runsort(a, shell);
+    runsort(a, mergesort);
     runsort(a, heapsort);
-    // srand(2);
-    // runsort(a, quicksort);
+    system("pause");
     return 0;
 }
