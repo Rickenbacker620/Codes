@@ -5,54 +5,52 @@
 
 using namespace std;
 
-struct TNode
-{
-    TNode(int data)
-    {
-        this->data = data;
-    }
-    TNode(int data, TNode *lchild, TNode *rchild)
-    {
-        this->data = data;
-        this->lchild = lchild;
-        this->rchild = rchild;
-    }
-    sort() char data;
-    TNode *lchild;
-    TNode *rchild;
-};
+// struct TNode
+// {
+//     TNode(int data)
+//     {
+//         this->data = data;
+//     }
+//     char data;
+//     TNode *lchild;
+//     TNode *rchild;
+// };
 
-class BiTree
-{
-  public:
-    BiTree()
-    {
-        CreateTree(root);
-    }
-    template <typename T>
-    TNode *CreateTree(TNode *&root)
-    {
-        char ch;
-        cin >> ch;
-        if (ch == '#')
-            root == nullptr;
-        else
-        {
-            root = new TNode(ch);
-            CreateTree(root->lchild);
-            CreateTree(root->rchild);
-        }
-        return root;
-    }
+// class BiTree
+// {
+//   public:
+//     BiTree()
+//     {
+//         CreateTree(root);
+//     }
+//     TNode *CreateTree(TNode *&root)
+//     {
+//         char ch;
+//         cin >> ch;
+//         if (ch == '#')
+//             root == nullptr;
+//         else
+//         {
+//             root = new TNode(ch);
+//             CreateTree(root->lchild);
+//             CreateTree(root->rchild);
+//         }
+//         return root;
+//     }
 
-  private:
-    TNode *root;
-};
+//   private:
+//     TNode *root;
+// };
 
 int
 main()
 {
-    BiTree t;
-    int a;
-    int b;
+    // BiTree t;
+    // int a;
+    // int b;
+    int a[]{1, 3, 5, 7, 9};
+    for (int i = 0; i < 5; i++)
+    {
+        cout << a[i] << endl;
+    }
 }

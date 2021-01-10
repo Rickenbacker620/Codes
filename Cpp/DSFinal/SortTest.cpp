@@ -9,7 +9,7 @@ runsort(vector<Unit> &nums, void (*mysort)(vector<Unit> &))
     cout << endl;
     if (nums.size() > 20)
         shuffle(nums);
-    if (nums.size() < 200)
+    if (nums.size() < 400)
     {
         cout << "initial order:" << endl;
         show(nums);
@@ -18,7 +18,7 @@ runsort(vector<Unit> &nums, void (*mysort)(vector<Unit> &))
         Timer time;
         mysort(nums);
     }
-    if (nums.size() < 200)
+    if (nums.size() <= 200)
         show(nums);
     if (check_sort(nums))
         cout << "sorted!" << endl;
