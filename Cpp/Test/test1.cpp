@@ -2,39 +2,30 @@
 #include <map>
 #include <string>
 #include <list>
+#include <vector>
 using namespace std;
 
 using mymap = multimap<string, int>;
 
 void
-print(multimap<string, int> T)
+bubble(vector<int> &nums)
 {
-    cout << T.size() << endl;
-    for (auto &i : T)
+    int len = nums.size();
+    for (int i = 0; i < len - 1; i++)
     {
-        auto [name, num] = i;
-        cout << name << num << endl;
+        for (int j = 0; j < len - i - 1; j++)
+            if (auto &&[pre, next] = make_pair(nums[j], nums[j + 1]); pre >= next)
+                swap(pre, next);
+        for (auto i : nums)
+            cout << i << '|';
+        cout << endl;
     }
 }
+
 int
 main()
 {
-    mymap T;
-    // T["red"] = 32;
-    // T["blue"] = 688;
-    // T["yellow"] = 122;
-    // T["blue"] += 312;
-    // T["blue"] = 10;
-
-    // print(T);
-
-    T.insert(make_pair("zebra", 101010));
-    T.insert(make_pair("white", 0));
-    T.insert(make_pair("zebra", 20));
-
-    print(T);
-
-    // pair<string, int> target = *T.find("red");
-    // cout << target.first << "-->" << target.second << endl;
+    vector<int> a{56, 39, 66, 98, 77, 139, 28, 50};
+    bubble(a);
     return 0;
 }

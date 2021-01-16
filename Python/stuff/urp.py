@@ -8,16 +8,13 @@ baseUrl = "http://jw1.yzu.edu.cn/"
 
 session = requests.Session()
 
-session.headers = {
-    'Connection': 'Keep-Alive',
-    'Accept-Language': 'zh-CN,zh;q=0.8',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0',
-    'Accept-Encoding': 'gzip, deflate',
-    'Upgrade-Insecure-Requests': '1',
-    'Referer': 'http://jw1.yzu.edu.cn',
-    'X-Requested-With': 'XMLHttpRequest',
-    'Host': 'jw1.yzu.edu.cn'}
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+           'Content-Type': 'application/x-www-form-urlencoded',
+           'Connection': 'keep-alive',
+           'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+           'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+           'Accept-Encoding': 'gzip, deflate',
+           'Upgrade-Insecure-Requests': '1'}
 
 
 def GetCode():
@@ -40,6 +37,8 @@ def Login(validcode):
     res = session.post(baseUrl+"loginAction.do", data=data)
     if "学分制综合教务" in res.text:
         print("登录成功\n")
+    else:
+        print("登陆失败\n")
 
 
 def GetSessionId():
@@ -58,14 +57,14 @@ def ClassScript():
     GetCode()
     validCode = input("输入验证码:\n")
     Login(validCode)
-    queryClass = {
-        "kch": 17038002,
-        "kcm": "",
-        "actionType": 3,
-        "pageNumber": -1
-    }
+    # queryClass = {
+    #     "kch": 17038002,
+    #     "kcm": "",
+    #     "actionType": 3,
+    #     "pageNumber": -1
+    # }
     classData = {
-        "kcId": 17018001_01,
+        "kcId": 17029015_01,
         # "kcId": 17038002_01,
         "preActionType": 3,
         "actionType": 9
@@ -73,27 +72,28 @@ def ClassScript():
 
     res = session.get(
         "http://jw1.yzu.edu.cn/xkAction.do?actionType=-1&fajhh=3440")
-    res = session.get(
-        "http://jw1.yzu.edu.cn/xkAction.do?actionType=3&pageNumber=-1")
+    # res = session.get(
+    #     "http://jw1.yzu.edu.cn/xkAction.do?actionType=3&pageNumber=-1")
     # res = session.post(baseUrl+"xkAction.do", data=queryClass)
 
-    sessionId = GetSessionId()
-    jSessionId = session.cookies["JSESSIONID"]
-    payloadData = "callCount=1\npage=/xkAction.do?actionType=-1&fajhh=3440\nhttpSessionId=" + jSessionId + \
-        "\nscriptSessionId="+sessionId + \
-        "\nc0-scriptName=ajaxtool\nc0-methodName=reCall\nc0-id=0\nbatchId=0 "
+    # sessionId = GetSessionId()
+    # jSessionId = session.cookies["JSESSIONID"]
+    # payloadData = "callCount=1\npage=/xkAction.do?actionType=-1&fajhh=3440\nhttpSessionId=" + jSessionId + \
+    #     "\nscriptSessionId="+sessionId + \
+    #     "\nc0-scriptName=ajaxtool\nc0-methodName=reCall\nc0-id=0\nbatchId=0 "
 
-    ajaxUrl = "http://jw1.yzu.edu.cn/dwr/call/plaincall/ajaxtool.reCall.dwr"
+    # ajaxUrl = "http://jw1.yzu.edu.cn/dwr/call/plaincall/ajaxtool.reCall.dwr"
 
-    res = session.post(ajaxUrl, data=payloadData)
-    # print(res.text)
+    # res = session.post(ajaxUrl, data=payloadData)
 
     res = session.post(
         baseUrl+"xkAction.do", data=classData)
-    res = session.post(
-        baseUrl+"xkAction.do", data=classData)
-    file = open("text.html", mode="w")
-    file.write(res.text)
+
+    # res = session.post(
+    #     baseUrl+"xkAction.do", data=classData)
+    print(res.text)
+    # file = open("text.html", mode="w")
+    # file.write(res.text)
 
 
 ClassScript()
