@@ -1,0 +1,7 @@
+POST /cas/login?service=http%3A%2F%2Fmy.yzu.edu.cn%2Fportal_main%2FtoPortalPage HTTP/1.1
+Host: uaaap.yzu.edu.cn
+Content-Type: application/x-www-form-urlencoded
+Cookie: CASTGC="TGT-190031-zeZYTPCRS5APVZS7ufmYUZekbw1MLPrkWX9ZQQeNVWV165aPnn-https://uaaap.yzu.edu.cn/cas"; JSESSIONID=83C2A8C13B859B754A7BD07193F40323-n1
+Content-Length: 215
+
+lt=LT-347872-dN3fDfVGj7ZKQmguY9EQW1MXB5AV0P-https%3A%2F%2Fuaaap.yzu.edu.cn%2Fcas&execution=e2s1&_eventId=submit&isQrSubmit=false&qrValue=%20&isMobileLogin=false&username=191304324&password=LUCIFERxyc200062&authCode=
