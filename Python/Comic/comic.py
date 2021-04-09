@@ -1,6 +1,7 @@
 import requests
 import re
 import os
+from lxml import etree
 
 
 class ComDown:
@@ -38,5 +39,17 @@ class ComDown:
                 self.savepage(self.imgbaseurl+page, i+1, pagepath)
 
 
-cc = ComDown("Attack on Titan", 2393, 882342, 882344)
-cc.traverse_page()
+# cc = ComDown("Attack on Titan", 2393, 882342, 882344)
+# cc.traverse_page()
+
+# url = "https://manhua.fzdm.com/39/"
+res = requests.get("https://manhua.fzdm.com/39/")
+content = res.text
+
+html = etree.HTML(content)
+
+titles = html.xpath('//li/a')
+result = html.xpath('//li/a')
+
+for r in result:
+    print(r.text)
