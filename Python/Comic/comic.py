@@ -48,8 +48,9 @@ content = res.text
 
 html = etree.HTML(content)
 
-titles = html.xpath('//li/a')
-result = html.xpath('//li/a')
+nodes = html.xpath('//div[@id="content"]/li/a')
 
-for r in result:
-    print(r.text)
+for node in nodes:
+    title = node.text
+    url = node.attrib['href']
+    print(title, url)
