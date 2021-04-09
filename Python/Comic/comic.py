@@ -1,56 +1,55 @@
 import requests
-import re
 import os
 from lxml import etree
 
 
-class ComDown:
-    def __init__(self, cname, cnum, start, end):
-        self.baseurl = "https://www.bnmanhua.com/comic/"
-        self.imgbaseurl = 'https://img.yaoyaoliao.com/'
-        self.cname = cname
-        self.cnum = cnum
-        self.start = start
-        self.end = end
+class Comic():
+    def __init__(self):
+        self.baseurl = "https://manhua.fzdm.com/39/"
+        self.name = "Attack On Titan"
+        self.chapters = []
 
-    def savepage(self, imgurl, imgnum, curpage):
-        with requests.get(imgurl, stream=True) as resp:
-            imgpath = curpage+"/"+str(imgnum)+".jpg"
-            if not os.path.exists(imgpath):
-                with open(imgpath, 'wb') as fd:
-                    for chunk in resp.iter_content():
-                        fd.write(chunk)
+    def GetChapters(self):
+        rawDoc = requests.get(self.baseurl).text
+        html = etree.HTML(rawDoc)
+        nodes = html.xpath('//div[@id="content"]/li/a')
 
-    def traverse_page(self):
-        if not os.path.exists(self.cname):
-            os.mkdir(self.cname)
-        for i in range(self.start, self.end+1):
-            pagepath = self.cname+"/"+str(i-self.start+1)
-            if not os.path.exists(pagepath):
-                os.makedirs(pagepath)
-            episodeurl = self.baseurl+str(self.cnum)+"/"+str(i)+".html?p="
-            res = requests.get(episodeurl)
-            theweb = res.text
-            z_img = re.search(r"z_img='.*'", theweb).group(0)
-            z_img = z_img.replace("\/", "/")
-            z_img = z_img.split("'")[1]
-            pages = eval("("+z_img+")")
-            for i, page in enumerate(pages):
-                self.savepage(self.imgbaseurl+page, i+1, pagepath)
+        for node in nodes:
+            title = node.text
+            url = self.baseurl + node.attrib['href']
+            self.chapters.append({'title': title, 'url': url})
+        return self
+
+    def GetPages(self, url):
+        # TODO
+        pages = []
+        urls = []
+        for url in urls:
+            pass
+        return ["pages", 'pages2']
+
+    def SaveChapter(self, chapter):
+        title = chapter['title']
+        url = chapter['url']
+        location = f"{self.name}/{title}/"
+
+        os.makedirs(location, exist_ok=True)
+
+        pages = self.GetPages(url)
+
+        for index, page in enumerate(pages):
+            with open(location + str(index) + '.txt', "w") as pic:
+                pic.write(page)
+
+    def Run(self):
+        self.GetChapters()
+        for chapter in self.chapters:
+            self.SaveChapter(chapter)
 
 
-# cc = ComDown("Attack on Titan", 2393, 882342, 882344)
-# cc.traverse_page()
+c = Comic()
 
-# url = "https://manhua.fzdm.com/39/"
-res = requests.get("https://manhua.fzdm.com/39/")
-content = res.text
+c.Run()
 
-html = etree.HTML(content)
-
-nodes = html.xpath('//div[@id="content"]/li/a')
-
-for node in nodes:
-    title = node.text
-    url = node.attrib['href']
-    print(title, url)
+# for chp in c.GetChapters().chapters:
+#     print(chp)
