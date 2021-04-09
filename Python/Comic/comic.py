@@ -2,6 +2,7 @@ import requests
 import re
 import os
 
+
 class ComDown:
     def __init__(self, cname, cnum, start, end):
         self.baseurl = "https://www.bnmanhua.com/comic/"
@@ -34,9 +35,8 @@ class ComDown:
             z_img = z_img.split("'")[1]
             pages = eval("("+z_img+")")
             for i, page in enumerate(pages):
-               self.savepage(self.imgbaseurl+page, i+1, pagepath)
+                self.savepage(self.imgbaseurl+page, i+1, pagepath)
 
 
-
-cc = ComDown("juren", 2393, 882342, 882344)
+cc = ComDown("Attack on Titan", 2393, 882342, 882344)
 cc.traverse_page()
