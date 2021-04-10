@@ -1,17 +1,24 @@
 import requests
 import os
+import re
 from lxml import etree
+
+
+def ParseHTML(url):
+    rawDoc = requests.get(url).text
+    html = etree.HTML(rawDoc)
+    return html
 
 
 class Comic():
     def __init__(self):
         self.baseurl = "https://manhua.fzdm.com/39/"
+        self.baseimgurl = "https://p5.manhuapan.com/"
         self.name = "Attack On Titan"
         self.chapters = []
 
     def GetChapters(self):
-        rawDoc = requests.get(self.baseurl).text
-        html = etree.HTML(rawDoc)
+        html = ParseHTML(self.baseurl)
         nodes = html.xpath('//div[@id="content"]/li/a')
 
         for node in nodes:
@@ -20,26 +27,41 @@ class Comic():
             self.chapters.append({'title': title, 'url': url})
         return self
 
-    def GetPages(self, url):
-        # TODO
-        pages = []
-        urls = []
-        for url in urls:
-            pass
-        return ["pages", 'pages2']
+    def GetImgIter(self, url):
+        idx = 0
+        while True:
+            pageurl = f"{url}index_{str(idx)}.html"
+            try:
+                yield {self.ExtractImg(pageurl), idx}
+            except IndexError:
+                return
+            idx += 1
+
+    def ExtractImg(self, pageurl):
+        res = requests.get(pageurl)
+        if res.status_code == 404:
+            raise IndexError
+
+        regexp = re.compile(r'(?<=mhurl=").*?(?=";)')
+        rawDoc = res.text
+        imgurl = self.baseimgurl + regexp.search(rawDoc).group(0)
+        return imgurl
 
     def SaveChapter(self, chapter):
         title = chapter['title']
         url = chapter['url']
-        location = f"{self.name}/{title}/"
+        path = f"{self.name}/{title}/"
 
-        os.makedirs(location, exist_ok=True)
+        os.makedirs(path, exist_ok=True)
 
-        pages = self.GetPages(url)
+        imgurls = self.GetImgIter(url)
 
-        for index, page in enumerate(pages):
-            with open(location + str(index) + '.txt', "w") as pic:
-                pic.write(page)
+        for index, imgurl in imgurls:
+            print(imgurl)
+            # with requests.get(imgurl, stream=True) as res:
+            #     with open(f"{path}{str(idx)}.jpg", "wb") as pic:
+            #         for chunk in res.iter_content():
+            #             pic.write(chunk)
 
     def Run(self):
         self.GetChapters()
@@ -49,7 +71,12 @@ class Comic():
 
 c = Comic()
 
-c.Run()
+c.SaveChapter({'title': "test", 'url': "https://manhua.fzdm.com/39/001/"})
+# c.ExtractImg("https://manhua.fzdm.com/39/001/index_100.html")
+
+# img = c.ExtractImg("https://manhua.fzdm.com/39/001/index_1.html")
+
+# print(img)
 
 # for chp in c.GetChapters().chapters:
 #     print(chp)
